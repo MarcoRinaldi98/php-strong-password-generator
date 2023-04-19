@@ -12,6 +12,20 @@
 <body class="bg-primary">
 
     <?php
+    session_start();
+    $length = $_GET["length"] ?? "";
+    $alert = false;
+    if (!empty($length)) {
+        $_SESSION["length"] = $length;
+        $_SESSION["repeat"] = $_GET["repeat"];
+        $_SESSION["lettere"] = $_GET["lettere"] ?? false;
+        $_SESSION["numeri"] = $_GET["numeri"] ?? false;
+        $_SESSION["simboli"] = $_GET["simboli"] ?? false;
+        header("Location: ./risultato.php");
+    } 
+    ?>
+
+    <?php
         session_start();
 
         require __DIR__ . '/functions.php';

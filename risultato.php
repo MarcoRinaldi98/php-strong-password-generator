@@ -11,6 +11,24 @@
 </head>
 <body class="bg-primary">
 
+    <?php
+    require __DIR__ . "/functions.php";
+
+    session_start();
+
+    $lettere = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    $simboli = '()!?@#$%&*-_+=';
+    $numeri = '0123456789';
+
+    if (isset($_SESSION["length"])) {
+        $chars = setChars($_SESSION["lettere"], $_SESSION["numeri"], $_SESSION["simboli"],);
+        $password = generatePassword($_SESSION["length"], $chars, $_SESSION["repeat"]);
+        unset($_SESSION["length"]);
+    } else {
+        header("Location: ./index.php");
+    }
+    ?>
+
     <div class="container-sm text-center py-5">
         <h1 class="text-body-secondary"> Strong Password Generator </h1>
         <h2 class="text-white">Genera una password sicura </h2>
@@ -18,12 +36,11 @@
         <div class="alert alert-primary text-primary fs-5 fw-semibold py-5" role="alert">
             La password generata è: 
             <?php  
-                session_start(); 
-                echo $_SESSION['password']; 
+                echo $password; 
             ?>
         </div>
 
-        <a href="index.php" class="btn btn-info">TORNA ALLA HOME PAGE</a>
+        <a href="index.php" class="btn btn-info text-white">TORNA ALLA HOME PAGE</a>
        
     </div>
 </body>
