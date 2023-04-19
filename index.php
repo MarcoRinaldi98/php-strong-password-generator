@@ -12,11 +12,19 @@
 <body class="bg-primary">
 
     <?php
+        session_start();
+
         require __DIR__ . '/functions.php';
 
-        if (isset($_GET['length'])) {
+        if (isset($_GET['length']) && $_GET['lenght'] !== '') {
             $length = $_GET['length'];
             $password = generatePassword($length);
+        }
+    
+        $_SESSION['password'] = $password;
+    
+        if($_SESSION['password'] && $_GET['lenght'] !== ''){
+            header('Location: ./risultato.php');
         }
     ?>
 
@@ -27,7 +35,7 @@
         <form class="container-fluid bg-info-subtle py-3 rounded-2" action="index.php" method="GET">
             <div class="row">
                 <div class="col-7 text-start mb-3">
-                    <label for="length" class="form-label text-primary">Lunghezza password: </label>
+                    <label for="length" class="form-label text-primary fw-semibold">Lunghezza password: </label>
                 </div>
                 <div class="col-auto mb-3">
                     <input type="text" class="form-control" id="length" name="length">
@@ -37,12 +45,6 @@
                 </div>
             </div>
         </form>
-
-        <?php if (isset($password)) { ?>
-            <div class="alert alert-primary text-warning-emphasis" role="alert">
-                La password generata è: <?php echo $password; ?>
-            </div>
-        <?php } ?>
         
     </div>
 </body>
