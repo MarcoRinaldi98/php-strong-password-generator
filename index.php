@@ -15,36 +15,29 @@
     session_start();
     $length = $_GET["length"] ?? "";
     $alert = false;
-    if (!empty($length)) {
+    if (!empty($length) && $length >= 8 && $length <= 32) {
         $_SESSION["length"] = $length;
         $_SESSION["repeat"] = $_GET["repeat"];
         $_SESSION["lettere"] = $_GET["lettere"] ?? false;
         $_SESSION["numeri"] = $_GET["numeri"] ?? false;
         $_SESSION["simboli"] = $_GET["simboli"] ?? false;
         header("Location: ./risultato.php");
-    } 
-    ?>
-
-    <?php
-        session_start();
-
-        require __DIR__ . '/functions.php';
-
-        if (isset($_GET['length']) && $_GET['lenght'] !== '') {
-            $length = $_GET['length'];
-            $password = generatePassword($length);
-        }
-    
-        $_SESSION['password'] = $password;
-    
-        if($_SESSION['password'] && $_GET['lenght'] !== ''){
-            header('Location: ./risultato.php');
-        }
+    } else if (isset($_GET["length"])) {
+        $alert = true;
+    }
     ?>
 
     <div class="container-sm text-center py-5">
         <h1 class="text-body-secondary"> Strong Password Generator </h1>
-        <h2 class="text-white">Genera una password sicura </h2>
+        <h2 class="text-white pb-3">Genera una password sicura </h2>
+
+        <?php
+            if ($alert) {
+                echo '  <div class="alert alert-danger" role="alert">
+                            Inserire lunghezza compresa tra 8 e 32 caratteri
+                        </div> ';
+            }
+        ?>
 
         <form class="container-fluid bg-info-subtle py-3 rounded-2" action="index.php" method="GET">
             <div class="row">

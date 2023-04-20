@@ -31,13 +31,15 @@
 
     <div class="container-sm text-center py-5">
         <h1 class="text-body-secondary"> Strong Password Generator </h1>
-        <h2 class="text-white">Genera una password sicura </h2>
+        <h2 class="text-white pb-3">Genera una password sicura </h2>
 
         <div class="alert alert-primary text-primary fs-5 fw-semibold py-5" role="alert">
             La password generata è: 
-            <?php  
-                echo $password; 
-            ?>
+            <span class="fs-3">
+                <?php  
+                    echo $password; 
+                ?>
+            </span>
         </div>
 
         <a href="index.php" class="btn btn-info text-white">TORNA ALLA HOME PAGE</a>
